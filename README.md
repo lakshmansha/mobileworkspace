@@ -1,5 +1,10 @@
 # Mobileworkspace
 
+Implemented 12 Factor App Environment Configurations.
+
+Implementation for Cordova App In-Progress.
+
+
 This project was generated using [Nx](https://nx.dev).
 
 <p align="center"><img src="https://raw.githubusercontent.com/nrwl/nx/master/nx-logo.png" width="450"></p>
