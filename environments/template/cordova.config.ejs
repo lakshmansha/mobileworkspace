@@ -1,0 +1,162 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="<%= App_ID %>" version="<%= VersionNo %>" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+  <name><%= App_Name %></name>
+  <description>  </description>
+  <author email="<%= AUTH_EMAIL %>" href="<%= AUTH_HREF %>">
+    <%= AUTH_DESC %>
+  </author>
+  <content src="index.html" />
+  <access origin="*" />
+  <allow-navigation href="http://localhost:8080/*" />
+  <allow-intent href="http://*/*" />
+  <allow-intent href="https://*/*" />
+  <allow-intent href="tel:*" />
+  <allow-intent href="sms:*" />
+  <allow-intent href="mailto:*" />
+  <allow-intent href="geo:*" />
+
+   <!-- Platforms -->
+   <engine name="android" spec="^7.0.0" />
+   <engine name="ios" spec="^4.5.4" />
+
+  <!-- Android specific -->
+  <platform name="android">
+    <allow-intent href="market:*" />
+    <preference name="android-minSdkVersion" value="19" />
+    <preference name="AndroidPersistentFileLocation" value="Compatibility" />
+    <preference name="android-manifest/application/activity/@android:theme"
+      value="@android:style/Theme.DeviceDefault" />
+    <!-- Copy files in the resources/android/extra folder to Android native resources -->
+    <hook src="node_modules/@ngx-rocket/scripts/hooks/after_prepare/copy-android-resources.js" type="after_prepare" />
+    <icon density="ldpi" src="<%= res %>/icons/android/icon-36-ldpi.png" />
+    <icon density="mdpi" src="<%= res %>/icons/android/icon-48-mdpi.png" />
+    <icon density="hdpi" src="<%= res %>/icons/android/icon-72-hdpi.png" />
+    <icon density="xhdpi" src="<%= res %>/icons/android/icon-96-xhdpi.png" />
+    <icon density="xxhdpi" src="<%= res %>/icons/android/icon-144-xxhdpi.png" />
+    <icon density="xxxhdpi" src="<%= res %>/icons/android/icon-192-xxxhdpi.png" />
+    <splash density="land-hdpi" src="<%= res %>/screens/android/screen-hdpi-landscape.png" />
+    <splash density="land-ldpi" src="<%= res %>/screens/android/screen-ldpi-landscape.png" />
+    <splash density="land-mdpi" src="<%= res %>/screens/android/screen-mdpi-landscape.png" />
+    <splash density="land-xhdpi" src="<%= res %>/screens/android/screen-xhdpi-landscape.png" />
+    <splash density="land-xxhdpi" src="<%= res %>/screens/android/screen-xxhdpi-landscape.png" />
+    <splash density="land-xxxhdpi" src="<%= res %>/screens/android/screen-xxxhdpi-landscape.png" />
+    <splash density="port-hdpi" src="<%= res %>/screens/android/screen-hdpi-portrait.png" />
+    <splash density="port-ldpi" src="<%= res %>/screens/android/screen-ldpi-portrait.png" />
+    <splash density="port-mdpi" src="<%= res %>/screens/android/screen-mdpi-portrait.png" />
+    <splash density="port-xhdpi" src="<%= res %>/screens/android/screen-xhdpi-portrait.png" />
+    <splash density="port-xxhdpi" src="<%= res %>/screens/android/screen-xxhdpi-portrait.png" />
+    <splash density="port-xxxhdpi" src="<%= res %>/screens/android/screen-xxxhdpi-portrait.png" />
+  </platform>
+
+  <!-- iOS specific -->
+  <platform name="ios">
+    <allow-intent href="itms:*" />
+    <allow-intent href="itms-apps:*" />
+    <preference name="deployment-target" value="9.0" />
+    <preference name="UIWebViewBounce" value="false" />
+    <!--
+      Don't store local data in an iCloud backup. Turn this to "cloud" to enable storage
+      to be sent to iCloud. Note: enabling this could result in Apple rejecting your app.
+    -->
+    <preference name="BackupWebStorage" value="local"/>
+    <preference name="iosPersistentFileLocation" value="Compatibility" />
+    <preference name="CordovaWebViewEngine" value="CDVWKWebViewEngine" />
+    <!-- Fix Bootstrap-specific scroll issue with WKWebView -->
+    <preference name="ScrollEnabled" value="true" />
+    <!-- Set status bar style during splash screen -->
+    <config-file mode="replace" parent="UIStatusBarStyle" platform="ios" target="*-Info.plist">
+      <string>UIStatusBarStyleLightContent</string>
+    </config-file>
+    <!-- Unlock screen rotation on ipad -->
+    <config-file mode="replace" parent="UISupportedInterfaceOrientations~ipad" platform="ios" target="*-Info.plist">
+      <array>
+        <string>UIInterfaceOrientationPortrait</string>
+        <string>UIInterfaceOrientationPortraitUpsideDown</string>
+        <string>UIInterfaceOrientationLandscapeLeft</string>
+        <string>UIInterfaceOrientationLandscapeRight</string>
+      </array>
+    </config-file>
+    <config-file parent="NSLocationWhenInUseUsageDescription" platform="ios" target="*-Info.plist" mode="replace">
+      <string>Please allows to get your location to show your position on map.</string>
+    </config-file>
+    <config-file parent="NSCameraUsageDescription" platform="ios" target="*-Info.plist" mode="replace">
+      <string>Please allow access to take pictures from camera.</string>
+    </config-file>
+    <config-file parent="NSPhotoLibraryUsageDescription" platform="ios" target="*-Info.plist" mode="replace">
+      <string>Please allow access to get pictures from photo library.</string>
+    </config-file>
+    <config-file parent="NSPhotoLibraryAddUsageDescription" platform="ios" target="*-Info.plist" mode="replace">
+      <string>Please allow access to save pictures to photo library.</string>
+    </config-file>
+    <icon height="29" src="<%= res %>/icons/ios/icon-small.png" width="29" />
+    <icon height="58" src="<%= res %>/icons/ios/icon-small-2x.png" width="58" />
+    <icon height="87" src="<%= res %>/icons/ios/icon-small-3x.png" width="87" />
+    <icon height="40" src="<%= res %>/icons/ios/icon-40.png" width="40" />
+    <icon height="80" src="<%= res %>/icons/ios/icon-40-2x.png" width="80" />
+    <icon height="120" src="<%= res %>/icons/ios/icon-40-3x.png" width="120" />
+    <icon height="50" src="<%= res %>/icons/ios/icon-50.png" width="50" />
+    <icon height="100" src="<%= res %>/icons/ios/icon-50-2x.png" width="100" />
+    <icon height="57" src="<%= res %>/icons/ios/icon-57.png" width="57" />
+    <icon height="114" src="<%= res %>/icons/ios/icon-57-2x.png" width="114" />
+    <icon height="60" src="<%= res %>/icons/ios/icon-60.png" width="60" />
+    <icon height="120" src="<%= res %>/icons/ios/icon-60-2x.png" width="120" />
+    <icon height="180" src="<%= res %>/icons/ios/icon-60-3x.png" width="180" />
+    <icon height="72" src="<%= res %>/icons/ios/icon-72.png" width="72" />
+    <icon height="144" src="<%= res %>/icons/ios/icon-72-2x.png" width="144" />
+    <icon height="76" src="<%= res %>/icons/ios/icon-76.png" width="76" />
+    <icon height="152" src="<%= res %>/icons/ios/icon-76-2x.png" width="152" />
+    <icon height="167" src="<%= res %>/icons/ios/icon-83.5-2x.png" width="167" />
+    <splash height="1136" src="<%= res %>/screens/ios/screen-iphone-568h-2x.png" width="640" />
+    <splash height="480" src="<%= res %>/screens/ios/screen-iphone-portrait.png" width="320" />
+    <splash height="960" src="<%= res %>/screens/ios/screen-iphone-portrait-2x.png" width="640" />
+    <splash height="1334" src="<%= res %>/screens/ios/screen-iphone-portrait-667h.png" width="750" />
+    <splash height="2208" src="<%= res %>/screens/ios/screen-iphone-portrait-736h.png" width="1242" />
+    <splash height="1242" src="<%= res %>/screens/ios/screen-iphone-landscape-736h.png" width="2208" />
+    <splash height="1024" src="<%= res %>/screens/ios/screen-ipad-portrait.png" width="768" />
+    <splash height="2048" src="<%= res %>/screens/ios/screen-ipad-portrait-2x.png" width="1536" />
+    <splash height="768" src="<%= res %>/screens/ios/screen-ipad-landscape.png" width="1024" />
+    <splash height="1536" src="<%= res %>/screens/ios/screen-ipad-landscape-2x.png" width="2048" />
+    <splash height="2048" src="<%= res %>/screens/ios/screen-ipad-landscape-ipadpro.png" width="2732" />
+    <splash height="2732" src="<%= res %>/screens/ios/screen-ipad-portrait-ipadpro.png" width="2048" />
+  </platform>
+
+  <!-- Permissions -->
+  <feature name="StatusBar">
+    <param name="ios-package" onload="true" value="CDVStatusBar" />
+  </feature>
+  <feature name="CDVWKWebViewEngine">
+    <param name="ios-package" value="CDVWKWebViewEngine" />
+  </feature>
+
+  <!-- Common to all platforms -->
+  <preference name="Fullscreen" value="false" />
+  <preference name="DisallowOverscroll" value="true" />
+  <preference name="Orientation" value="portrait" />
+  <preference name="StatusBarOverlaysWebView" value="false" />
+  <preference name="StatusBarStyle" value="default" />
+  <preference name="AutoHideSplashScreen" value="false" />
+  <preference name="SplashScreen" value="screen" />
+  <preference name="SplashScreenDelay" value="3000" />
+  <preference name="ShowSplashScreenSpinner" value="false" />
+  <preference name="SplashMaintainAspectRatio" value="true" />
+  <preference name="FadeSplashScreenDuration" value="500" />
+  <preference name="SplashShowOnlyFirstTime" value="true" />
+  <!-- Plugins -->
+  <plugin name="cordova-plugin-device" spec="^2.0.1" />
+  <plugin name="cordova-plugin-splashscreen" spec="^5.0.1" />
+  <plugin name="cordova-plugin-statusbar" spec="^2.4.1" />
+  <plugin name="cordova-plugin-whitelist" spec="^1.3.3" />
+  <plugin name="cordova-plugin-ionic-webview" spec="^2.0.0" />
+  <plugin name="cordova-plugin-ionic-keyboard" spec="^2.0.5" />
+  <plugin name="cordova-custom-config" spec="^5.0.2" />
+  <plugin name="cordova-plugin-camera" spec="^4.0.3" />
+  <plugin name="cordova-plugin-dialogs" spec="^2.0.1" />
+  <plugin name="cordova-plugin-geolocation" spec="^4.0.1" />
+  <plugin name="cordova-plugin-network-information" spec="^2.0.1" />
+  <plugin name="cordova-plugin-file" spec="^6.0.1" />
+  <plugin name="cordova-plugin-file-opener2" spec="^2.1.4">
+    <variable name="ANDROID_SUPPORT_V4_VERSION" value="27.+" />
+  </plugin>
+  <plugin name="cordova-plugin-email-composer" spec="^0.8.15" />
+  <plugin name="cordova-plugin-phone-call" spec="^1.0.7" />
+</widget>
