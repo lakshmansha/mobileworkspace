@@ -1,4 +1,4 @@
-var pkg = require('../../package.json');
+var pkg = require('../../../package.json');
 
 var version = pkg['myapp-version'];
 

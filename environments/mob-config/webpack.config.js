@@ -1,26 +1,10 @@
 var XMLWebpackPlugin = require('xml-webpack-plugin');
 var path = require('path');
 
-var xmlFiles = (value) => {
+var xmlMOBFiles = (value) => {
   return [
     {
-      template: path.join(__dirname, 'env.config.ejs'),
-      filename: 'env_bundle.js',
-      data: {
-        ServerUrl: value.ServerUrl,
-        VersionNo: value.VersionNo,
-        App_Name: value.App_Name,
-        AuthType: value.AuthType,
-        ENV: value.ENV
-      }
-    }
-  ];
-};
-
-var xmlMobileFiles = (value) => {
-  return [
-    {
-      template: path.join(__dirname, '/template/cordova.config.ejs'),
+      template: path.join(__dirname, values.MOBPATH),
       filename: 'config.xml',
       data: {
         App_ID: value.App_ID,
@@ -45,20 +29,25 @@ module.exports = (env) => {
   var plugins = [];
   var environment = require('./' + env.APP + '/env');
 
+  const envr = 'production';
   var config = environment.dev;
   if (env.MODE !== "dev") {
     config = environment[env.MODE];
   }
-  let envr = 'production';
-  let _path = '../apps/' + env.APP + '/src/assets';
-  if (env.CHANNEL === "prod") {
-    _path = '../dist/apps/' + env.APP + '/assets'
-  }
+
+  // let _path = '../apps/' + env.APP + '/src/assets';
+  // if (env.CHANNEL === "prod") {
+  //   _path = '../dist/apps/' + env.APP + '/assets'
+  // }
+
+  const _path = "";
+
+  environment[env.MODE].MOBPATH = "apps/" + env.APP + '/cordova.config.ejs';
 
   plugins.push(new XMLWebpackPlugin({ files: xmlFiles(config) }));
 
   if (env.MOBILE === "y") {
-    plugins.push(new XMLWebpackPlugin({ files: xmlMobileFiles(config) }));
+    plugins.push(new XMLWebpackPlugin({ files: xmlMOBFiles(config) }));
   }
 
   return {

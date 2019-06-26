@@ -37,3 +37,8 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+# Auto Generate Files
+./env_bundle.js
+
+apps/my-app/src/assets/env_bundle.js
