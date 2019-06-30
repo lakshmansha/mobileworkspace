@@ -3,7 +3,14 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  version: (<any> window)._env.VersionNo + ' ' + (<any> window)._env.ENV,
+  serverUrl: (<any> window)._env.serverUrl,
+  IsWeb: true,
+  VersionNo: (<any> window)._env.VersionNo,
+  IsSimulator: true,
+  authenticationType: (<any> window)._env.authenticationType,
+  App_Name: (<any> window)._env.App_Name
 };
 
 /*

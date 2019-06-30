@@ -5,8 +5,16 @@
 /tmp
 /out-tsc
 
-# dependencies
+# Dependencies
 /node_modules
+
+# Cordova
+res
+resources
+model
+/www
+/plugins
+/platforms
 
 # IDEs and editors
 /.idea
@@ -37,3 +45,9 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+# Auto Generate Files
+./env_bundle.js
+apps/*/src/assets/env_bundle.js
+config.xml
+webpack_bundle.js
