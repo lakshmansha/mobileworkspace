@@ -1,10 +1,11 @@
 var XMLWebpackPlugin = require('xml-webpack-plugin');
+var CopyWebpackPlugin = require('copy-webpack-plugin');
 var path = require('path');
 
 var xmlMOBFiles = (value) => {
   return [
     {
-      template: path.join(__dirname, values.MOBPATH),
+      template: path.join(__dirname, value.MOBPATH + '/cordova.config.ejs'),
       filename: 'config.xml',
       data: {
         App_ID: value.App_ID,
@@ -24,35 +25,37 @@ module.exports = (env) => {
   console.log('Environment : ', env.MODE);
   console.log('Environment CHANNEL : ', env.CHANNEL);
   console.log('App NAME : ', env.APP);
-  console.log('Is Mobile Build : ', env.MOBILE);
+  console.log('Is Mobile Build : ', env.MOB);
 
   var plugins = [];
-  var environment = require('./' + env.APP + '/env');
+  var environment = require('../apps/' + env.APP + '/env');
 
-  const envr = 'production';
   var config = environment.dev;
   if (env.MODE !== "dev") {
     config = environment[env.MODE];
   }
 
-  // let _path = '../apps/' + env.APP + '/src/assets';
-  // if (env.CHANNEL === "prod") {
-  //   _path = '../dist/apps/' + env.APP + '/assets'
-  // }
+  const envr = 'production';
+  const _path = "../../";
+  const _dist = './dist/apps/' + env.APP;
 
-  const _path = "";
+  var RESPATH = "././environments/apps/" + env.APP;
+  config.MOBPATH = "../../environments/apps/" + env.APP;
 
-  environment[env.MODE].MOBPATH = "apps/" + env.APP + '/cordova.config.ejs';
+  plugins.push(new XMLWebpackPlugin({ files: xmlMOBFiles(config) }));
 
-  plugins.push(new XMLWebpackPlugin({ files: xmlFiles(config) }));
-
-  if (env.MOBILE === "y") {
-    plugins.push(new XMLWebpackPlugin({ files: xmlMOBFiles(config) }));
+  if (env.MOB === "y") {
+    plugins.push(new CopyWebpackPlugin([
+      { from: RESPATH + '/resources', to: 'model'}
+    ]));
+    plugins.push(new CopyWebpackPlugin([
+      { from: _dist, to: 'www'}
+    ]));
   }
 
   return {
     mode: envr,
-    entry: path.join(__dirname, 'webpack.ts'),
+    entry: path.join(__dirname, '../webpack.ts'),
     output: {
       path: path.resolve(__dirname, _path),
       filename: 'webpack_bundle.js'

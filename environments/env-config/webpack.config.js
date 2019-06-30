@@ -4,7 +4,7 @@ var path = require('path');
 var xmlFiles = (value) => {
   return [
     {
-      template: path.join(__dirname, value.ENVPATH),
+      template: path.join(__dirname, value.ENVPATH + '/env.config.ejs'),
       filename: 'env_bundle.js',
       data: {
         ServerUrl: value.ServerUrl,
@@ -31,6 +31,7 @@ module.exports = (env) => {
   if (env.MODE !== "dev") {
     config = environment[env.MODE];
   }
+
   let envr = 'production';
   let _path = '../../apps/' + env.APP + '/src/assets';
   if (env.CHANNEL === "prod") {
@@ -39,7 +40,7 @@ module.exports = (env) => {
     _path = "../../www/assets";
   }
 
-  environment[env.MODE].ENVPATH = "../apps/" + env.APP + '/env.config.ejs';
+  config.ENVPATH = "../apps/" + env.APP;
 
   plugins.push(new XMLWebpackPlugin({ files: xmlFiles(config) }));
 

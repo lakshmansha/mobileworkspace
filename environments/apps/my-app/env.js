@@ -1,6 +1,6 @@
 var pkg = require('../../../package.json');
 
-var version = pkg['myapp-version'];
+var version = pkg['my-app-version'];
 
 var DESCRIPTION = "My App For Testing 12 Factor App with Mobile Implemetation."
 
